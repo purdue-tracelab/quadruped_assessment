@@ -1,0 +1,27 @@
+
+
+$ ssh ghost@192.168.168.105
+pass: ghost
+
+Wifi: Vision60_v5.1C_015
+Pass: vision60
+
+ros Source:
+$ ros2s
+Follow with normal ros2 commands
+$ ros2 topic list
+$ ros2 topic echo /mcu/state/param
+
+Step-in-Place mainboard parameters:
+$ ros2 service call /set_param ghost_manager_interfaces/SetParam "{param:{name: PCW_PEP_XP, val: [0]}}" 
+$ ros2 service call /set_param ghost_manager_interfaces/SetParam "{param:{name: PCW_PEP_XM, val: [0]}}" 
+
+ros2 not functioning correctly:
+$ sudo service ghost_ros2 status
+If marker green -> success, If marker red or white:
+$ sudo service ghost restart
+$ sudo service ghost_ros2 restart
+check status again. If failed restart V60
+
+experiment rosbag line:
+ros2 bag record /mcu/state/jointURDF /mcu/state/toe_array /mcu/command/manual_twist
