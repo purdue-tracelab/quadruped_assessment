@@ -452,8 +452,7 @@ maxGaitAveEff = ceil(maxGaitAveEff/10)*10;
 minGaitAveEff = -maxGaitAveEff * 0.03;
 maxAllEffort = ceil(maxAllEffort/10)*10;
 minAllEffort = -maxAllEffort * 0.03;
-% maxAngles = ceil(maxAngles*10)/10;
-% minAngles = -maxAngles;
+
 
 
 

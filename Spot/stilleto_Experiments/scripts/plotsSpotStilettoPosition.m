@@ -51,7 +51,6 @@ for n = 1:size(data,2)      % Cycle experiments
     count = 0;
 
     while t1 < length(data(n).time)
-        %t1 = 1:(length(data(n).time)-1)     % Cycle Timestamps
         totX = data(n).X(t1);                   % init a total value for each timestamp to average
         totY = data(n).Y(t1); 
         i = 1;
@@ -105,20 +104,12 @@ for k = 1:size(data,2)
     end
 end
 
-%% Plotting Position
 
-% figure
-% n=20;
-% plot(data(n).X, data(n).Y)
-    
 
 for n = 1:size(data,2)
 % for n = 13
     screensize = get(0, 'ScreenSize');
 fig1 = figure(WindowState="maximized");
-    %fig1 = figure('Visible','off', WindowState="maximized");
-%     fig1 = figure('Visible','off', WindowState="maximized", ...
-%           Position=[1, 1, screensize(4), screensize(3)]);
     tiledlayout(6,10,'TileSpacing','Compact','Padding','Compact')
 
 
@@ -126,9 +117,6 @@ fig1 = figure(WindowState="maximized");
     plot(data(n).time,data(n).X)
     data(n).stdev.X = std(data(n).X);
     data(n).ave.X   = mean(data(n).X);
-%     yline(data(n).ave.X,'r--',...
-%           {strcat("\fontsize{5}Average: ", num2str(data(n).ave.X)),...
-%            strcat("\fontsize{5}stdev: ", num2str(data(n).stdev.X))})
     yline(data(n).ave.X,'r--',"\fontsize{5}Ave")
     title(strcat("\fontsize{8}Average: ", num2str(data(n).ave.X),...
                           "  |  stdev: ", num2str(data(n).stdev.X)))
@@ -152,9 +140,6 @@ fig1 = figure(WindowState="maximized");
     plot(data(n).time,data(n).Y)
     data(n).stdev.Y = std(data(n).Y);
     data(n).ave.Y   = mean(data(n).Y);
-%     yline(data(n).ave.Y,'r--',...
-%           {strcat("\fontsize{5}Average: ", num2str(data(n).ave.Y)),...
-%            strcat("\fontsize{5}stdev: ", num2str(data(n).stdev.Y))})
     yline(data(n).ave.Y,'r--',"\fontsize{5}Ave")
     title(strcat("\fontsize{8}Average: ", num2str(data(n).ave.Y),...
                           "  |  stdev: ", num2str(data(n).stdev.Y)))

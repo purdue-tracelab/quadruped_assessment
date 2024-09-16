@@ -19,14 +19,13 @@ txtFiles = dir(strcat(filePath, '*.txt'));
 test(size(txtFiles,1),1) = string();   % init
 for i = 1:size(txtFiles,1)
     test(i, 1) = string(extractBetween(txtFiles(i).name, '', '-'));
-    %     trialPath(i, 1) = strcat(filePath, string(test));
+   
 end
 
 nTests = size(txtFiles,1);
 
 %% Get trc data
 for k = 1:2:nTests
-% for k = 7
     platPath = strcat(filePath, test(k), '-platform.txt');
     spotPath  = strcat(filePath, test(k), '-v60.txt');
 
@@ -94,115 +93,7 @@ for j = 1:size(plat,2)
     end
 end
 
-% Average CoR across moving trials for the stationary one
-% allCoRx = plat(1).CoR.X;
-% allCoRy = plat(1).CoR.Y;
-% allCoRz = plat(1).CoR.Z;
-% for j = 2:74
-%     allCoRx = [allCoRx, plat(j).CoR.X];
-%     allCoRy = [allCoRy, plat(j).CoR.Y];
-%     allCoRz = [allCoRz, plat(j).CoR.Z];
-% end
-% aveCoR(1) = mean(allCoRx);
-% aveCoR(2) = mean(allCoRy);
-% aveCoR(3) = mean(allCoRz);
 
-%% Platform Shape 2D
-% figure
-% plot(plat(1).FR.X(290:425), plat(1).FR.Z(290:425), 'r', ...
-%      plat(1).FL.X(290:425), plat(1).FL.Z(290:425), 'c', ...
-%      plat(1).AR.X(290:425), plat(1).AR.Z(290:425), 'm', ...
-%      plat(1).AL.X(290:425), plat(1).AL.Z(290:425), 'k', ...
-%      plat(1).Po.X(290:425), plat(1).Po.Z(290:425), 'b', ...
-%      plat(1).O.X(290:425),  plat(1).O.Z(290:425),  'g', ...
-%      plat(1).FR.X(290), plat(1).FR.Z(290), 'r.', ...
-%      plat(1).FL.X(290), plat(1).FL.Z(290), 'c.', ...
-%      plat(1).AR.X(290), plat(1).AR.Z(290), 'm.', ...
-%      plat(1).AL.X(290), plat(1).AL.Z(290), 'k.', ...
-%      plat(1).Po.X(290), plat(1).Po.Z(290), 'b.', ...
-%      plat(1).O.X(290),  plat(1).O.Z(290),  'g.', ...
-%      plat(1).FR.X(425), plat(1).FR.Z(425), 'rx', ...
-%      plat(1).FL.X(425), plat(1).FL.Z(425), 'cx', ...
-%      plat(1).AR.X(425), plat(1).AR.Z(425), 'mx', ...
-%      plat(1).AL.X(425), plat(1).AL.Z(425), 'kx', ...
-%      plat(1).Po.X(425), plat(1).Po.Z(425), 'bx', ...
-%      plat(1).O.X(425),  plat(1).O.Z(425),  'gx', ...
-%      0,0, 'ko')
-% legend('FR', 'FL', 'AR', 'AL', 'Po', 'C', Location='northoutside', Orientation='horizontal')
-% xlabel('X')
-% ylabel('Z')
-% title('Top-Down')
-% 
-% figure
-% plot(plat(1).FR.X(290:425), plat(1).FR.Y(290:425), 'r', ...
-%      plat(1).FL.X(290:425), plat(1).FL.Y(290:425), 'c', ...
-%      plat(1).AR.X(290:425), plat(1).AR.Y(290:425), 'm', ...
-%      plat(1).AL.X(290:425), plat(1).AL.Y(290:425), 'k', ...
-%      plat(1).Po.X(290:425), plat(1).Po.Y(290:425), 'b', ...
-%      plat(1).O.X(290:425),  plat(1).O.Y(290:425),  'g', ...
-%      plat(1).FR.X(290), plat(1).FR.Y(290), 'r.', ...
-%      plat(1).FL.X(290), plat(1).FL.Y(290), 'c.', ...
-%      plat(1).AR.X(290), plat(1).AR.Y(290), 'm.', ...
-%      plat(1).AL.X(290), plat(1).AL.Y(290), 'k.', ...
-%      plat(1).Po.X(290), plat(1).Po.Y(290), 'b.', ...
-%      plat(1).O.X(290),  plat(1).O.Y(290),  'g.', ...
-%      plat(1).FR.X(425), plat(1).FR.Y(425), 'rx', ...
-%      plat(1).FL.X(425), plat(1).FL.Y(425), 'cx', ...
-%      plat(1).AR.X(425), plat(1).AR.Y(425), 'mx', ...
-%      plat(1).AL.X(425), plat(1).AL.Y(425), 'kx', ...
-%      plat(1).Po.X(425), plat(1).Po.Y(425), 'bx', ...
-%      plat(1).O.X(425),  plat(1).O.Y(425),  'gx', ...
-%      0,0, 'ko')
-% legend('FR', 'FL', 'AR', 'AL', 'Po', 'C', Location='northoutside', Orientation='horizontal')
-% xlabel('X')
-% ylabel('Y')
-% title('Front-Back')
-% 
-% figure
-% plot(plat(1).FR.Z(290:425), plat(1).FR.Y(290:425), 'r', ...
-%      plat(1).FL.Z(290:425), plat(1).FL.Y(290:425), 'c', ...
-%      plat(1).AR.Z(290:425), plat(1).AR.Y(290:425), 'm', ...
-%      plat(1).AL.Z(290:425), plat(1).AL.Y(290:425), 'k', ...
-%      plat(1).Po.Z(290:425), plat(1).Po.Y(290:425), 'b', ...
-%      plat(1).O.Z(290:425),  plat(1).O.Y(290:425),  'g', ...
-%      plat(1).FR.Z(290), plat(1).FR.Y(290), 'r.', ...
-%      plat(1).FL.Z(290), plat(1).FL.Y(290), 'c.', ...
-%      plat(1).AR.Z(290), plat(1).AR.Y(290), 'm.', ...
-%      plat(1).AL.Z(290), plat(1).AL.Y(290), 'k.', ...
-%      plat(1).Po.Z(290), plat(1).Po.Y(290), 'b.', ...
-%      plat(1).O.Z(290),  plat(1).O.Y(290),  'g.', ...
-%      plat(1).FR.Z(425), plat(1).FR.Y(425), 'rx', ...
-%      plat(1).FL.Z(425), plat(1).FL.Y(425), 'cx', ...
-%      plat(1).AR.Z(425), plat(1).AR.Y(425), 'mx', ...
-%      plat(1).AL.Z(425), plat(1).AL.Y(425), 'kx', ...
-%      plat(1).Po.Z(425), plat(1).Po.Y(425), 'bx', ...
-%      plat(1).O.Z(425),  plat(1).O.Y(425),  'gx', ...
-%      0,0, 'ko')
-% legend('FR', 'FL', 'AR', 'AL', 'Po', 'C', Location='northoutside', Orientation='horizontal')
-% xlabel('Z')
-% ylabel('Y')
-% title('Left-Right')
-
-%% Platform shape 3D
-% FR2FL = [plat(1).FR.X(1), plat(1).FR.Y(1), plat(1).FR.Z(1);
-%          plat(1).FL.X(1), plat(1).FL.Y(1), plat(1).FL.Z(1)];
-% FR2AR = [plat(1).FR.X(1), plat(1).FR.Y(1), plat(1).FR.Z(1);
-%          plat(1).AR.X(1), plat(1).AR.Y(1), plat(1).AR.Z(1)];
-% FL2AL = [plat(1).FL.X(1), plat(1).FL.Y(1), plat(1).FL.Z(1);
-%          plat(1).AL.X(1), plat(1).AL.Y(1), plat(1).AL.Z(1)];
-% AR2AL = [plat(1).AR.X(1), plat(1).AR.Y(1), plat(1).AR.Z(1);
-%          plat(1).AL.X(1), plat(1).AL.Y(1), plat(1).AL.Z(1)];
-% 
-% figure
-% plot3(plat(1).FR.X(1), plat(1).FR.Y(1), plat(1).FR.Z(1), 'ro',...
-%       plat(1).AR.X(1), plat(1).AR.Y(1), plat(1).AR.Z(1), 'co',...
-%       plat(1).FL.X(1), plat(1).FL.Y(1), plat(1).FL.Z(1), 'mo',...
-%       plat(1).AL.X(1), plat(1).AL.Y(1), plat(1).AL.Z(1), 'ko')
-% hold on
-% plot3(FR2FL(:,1), FR2FL(:,2), FR2FL(:,3))
-% plot3(FR2AR(:,1), FR2AR(:,2), FR2AR(:,3))
-% plot3(FL2AL(:,1), FL2AL(:,2), FL2AL(:,3))
-% plot3(AR2AL(:,1), AR2AL(:,2), AR2AL(:,3))
 
 %% Calculate Transforms
 maxX = 0;
@@ -400,18 +291,7 @@ for j = 1:size(plat,2)      % Cycle tests
         W2P_spotPos(j).Yaw(f) = (Yaw_A2C + Yaw_C2F + Yaw_A2F)/3;
     end
 
-%     figure
-%     plot(W2P_PlatPos(j).C.X, W2P_PlatPos(j).C.Z)
-%     xlabel('x')
-%     ylabel('z')
-%     figure
-%     plot(W2P_PlatPos(j).C.Y, W2P_PlatPos(j).C.Z)
-%     xlabel('y')
-%     ylabel('z')
-%     figure
-%     plot(W2P_PlatPos(j).C.X, W2P_PlatPos(j).C.Y)
-%     xlabel('x')
-%     ylabel('y')
+
 
     % finds max and min X, Y, and Z values within treadmill frame
     maxXD = max(W2P_spotPos(j).C.X);
@@ -468,43 +348,6 @@ for j = 1:size(plat,2)
     % Function to plot spot disp
     W2P_spotPos(j).Disp = plotSpotXYZ_Disp(W2P_spotPos(j), W2P_PlatPos(j), plat(j).test, test(j*2));
     
-%     maxArmDist = max([max(armDistX), max(armDistY), max(armDistZ), max(armDistEucl)]);
-%     minArmDist = min([min(armDistX), min(armDistY), min(armDistZ), min(armDistEucl)]);
-%     
-%     figure(j+7)
-%     
-%     subplot(4, 1, 1)
-%     plot(spot(j).time, armDistX)
-%     % ylim([minArmDist, maxArmDist])
-%     title('X')
-%     ylabel('Distance [mm]')
-%     xlabel('Time [s]')
-%     
-%     subplot(4, 1, 2)
-%     plot(spot(j).time, armDistY)
-%     % ylim([minArmDist, maxArmDist])
-%     title('Y')
-%     ylabel('Dist [mm]')
-%     xlabel('Time [s]')
-%     
-%     subplot(4, 1, 3)
-%     plot(spot(j).time, armDistZ)
-%     % ylim([minArmDist, maxArmDist])
-%     title('Z')
-%     ylabel('Dist [mm]')
-%     xlabel('Time [s]')
-%     
-%     subplot(4, 1, 4)
-%     plot(spot(j).time, armDistEucl)
-%     % ylim([minArmDist, maxArmDist])
-%     title('Euclidean')
-%     ylabel('Dist [mm]')
-%     xlabel('Time [s]')
-%     
-%     sgtitle(strcat('Wrist Distance from Tag -Trial:  ', plat(j).test))
-% 
-%     saveName = strcat(filePath, test(j*3), '_wristDist');
-%     saveas(j+7, saveName, 'jpg')
 end
 
 %% Support Polygon
@@ -543,9 +386,6 @@ largestStdevZ_Robot = 0;
 largestStdevX_Robot = 0;
 
 for j=52 %jB-2-2
-%for j=14 %B-2-4
-%for j=34 %jA-1-4
-%for j = 1:size(plat,2)      % Cycle tests
     % Because the hip motors are equally placed on Spot, body CoM is unknown,
     %    hip masses are combined with the body
     centerMass(j).body.X = spot(j).O.X;
@@ -580,7 +420,7 @@ for j=52 %jB-2-2
         centerMass(j).arm.X = (((spot(j).FL.X + spot(j).FR.X)./2) + spot(j).Arm.X)./2;
         centerMass(j).arm.Y = (((spot(j).FL.Y + spot(j).FR.Y)./2) + spot(j).Arm.Y)./2;
         centerMass(j).arm.Z = (((spot(j).FL.Z + spot(j).FR.Z)./2) + spot(j).Arm.Z)./2;
-%     end
+
         % Using weighted average to calc CoM XYZ
         bodyCoMx = bodyCombinedMass*centerMass(j).body.X;
         armCoMx  =  armCombinedMass*centerMass(j).arm.X;
@@ -861,17 +701,14 @@ tiledlayout(3,1, 'TileSpacing','tight','Padding','tight')
 nexttile
 boxplot(spot_Roll, abvNames, "Whisker",15)
 ylabel('Angle [rads]')
-%ylim([-pi/2, pi/2])
 title('Roll')
 nexttile
 boxplot(spot_Pitch, abvNames, "Whisker",15)
 ylabel('Angle [rads]')
-%ylim([-pi/2, pi/2])
 title('Pitch')
 nexttile
 boxplot(spot_Yaw, abvNames, "Whisker",15)
 ylabel('Angle [rads]')
-%ylim([-pi/2, pi/2])
 title('Yaw')
 
 sgtitle('Spot Concatenated Orientations by Experiment Type and Motion')
@@ -896,12 +733,10 @@ tiledlayout(2,1, 'TileSpacing','tight','Padding','tight')
 nexttile
 boxplot(v60_CoMRangeXW, abvNames, "Whisker",15)
 ylabel('Range [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM X Range')
 nexttile
 boxplot(v60_CoMRangeZW, abvNames, "Whisker",15)
 ylabel('Range [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM Z Range')
 
 sgtitleName = 'Spot Concatenated CoM Range wrt World by Experiment Type and Motion';
@@ -918,12 +753,10 @@ tiledlayout(2,1, 'TileSpacing','tight','Padding','tight')
 nexttile
 boxplot(v60_CoMRangeXR, abvNames, "Whisker",15)
 ylabel('Range [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM X Range')
 nexttile
 boxplot(v60_CoMRangeZR, abvNames, "Whisker",15)
 ylabel('Range [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM Z Range')
 
 sgtitleName = 'Spot Concatenated CoM Range wrt Robot by Experiment Type and Motion';
@@ -940,12 +773,10 @@ tiledlayout(2,1, 'TileSpacing','tight','Padding','tight')
 nexttile
 boxplot(v60_CoMStdevXW, abvNames, "Whisker",15)
 ylabel('StDev [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM X StDev')
 nexttile
 boxplot(v60_CoMStdevZW, abvNames, "Whisker",15)
 ylabel('StDev [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM Z StDev')
 
 sgtitleName = 'Spot Concatenated CoM Standard Deviation wrt World by Experiment Type and Motion';
@@ -962,12 +793,10 @@ tiledlayout(2,1, 'TileSpacing','tight','Padding','tight')
 nexttile
 boxplot(v60_CoMStdevXR, abvNames, "Whisker",15)
 ylabel('StDev [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM X StDev')
 nexttile
 boxplot(v60_CoMStdevZR, abvNames, "Whisker",15)
 ylabel('StDev [mm]')
-%ylim([-pi/2, pi/2])
 title('CoM Z StDev')
 
 sgtitleName = 'Spot Concatenated CoM Standard Deviation wrt Robot by Experiment Type and Motion';

@@ -23,12 +23,8 @@ dataFolderPath = '../experiment_data/2024_tests_REDO/';
 setDir = dir(dataFolderPath);
 numSet = size(setDir,1);            % = num of exp + 2 ('.', '..')
 
-% hipLim = 72.67;
-% kneLim = 98.8;
-% abdLim = 98.8;
-
 %% Parse Data
-% init stuff
+% init 
 maxLength  = 0;
 r = 0;
 
@@ -40,7 +36,6 @@ for set = 3:numSet
 
     % Sorts Motion type (none, low, heavy, stilletto)
     for mo = 3:numMo
-        %for mo = 5
         expDirPath = strcat(motionDir(mo).folder, '\', motionDir(mo).name, '\');
         expDir = dir(strcat(expDirPath, '*.txt'));      
         numExp = size(expDir,1);
@@ -102,11 +97,6 @@ for set = 3:numSet
             expData(set).motion(mo).name = moName;
             expData(set).motion(mo).trial(exp).name = expName;
             
-%             gaitFrame = getGaitFrames(expTable);
-%             if gaitFrame > 5
-%                 r = r + 1;
-%                 aveGaitFrame(r,1) = gaitFrame;
-%             end
 
             expData(set).motion(mo).trial(exp).angles = ...
                     parse_Angles(expTable, setName, moName, expName);
@@ -196,7 +186,7 @@ for set = 3:numSet
         end
     end
 end
-% frameNum = round(mean(aveGaitFrame));     % ave frame = 37
+
 
 %% Set Up Box Plots
 testNames = ["Baseline";
@@ -331,234 +321,7 @@ minAllEffort  = -maxAllEffort * 0.03;
 maxGaitAveEff = ceil(maxGaitAveEff/10)*10;
 minGaitAveEff = -maxGaitAveEff * 0.03;
 
-%% Box Plotting
-%{
-fig1 = figure(WindowState="maximized");     %'Visible','off');
-tiledlayout(4,3, 'TileSpacing','tight','Padding','tight')
-% FL Leg
-nexttile
-boxplot(FLHipEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FL Hip')
-% yline(hipLim, '--', 'Limit')
-nexttile
-boxplot(FLKneEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FL Knee')
-% yline(kneLim, '--', 'Limit')
-nexttile
-boxplot(FLAbdEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FL Abductor')
-% yline(abdLim, '--', 'Limit')
-% FR Leg
-nexttile
-boxplot(FRHipEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FR Hip')
-nexttile
-boxplot(FRKneEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FR Knee')
-nexttile
-boxplot(FRAbdEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FR Abductor')
-% AL Leg
-nexttile
-boxplot(RLHipEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AL Hip')
-nexttile
-boxplot(RLKneEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AL Knee')
-nexttile
-boxplot(RLAbdEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AL Abductor')
-% AR Leg
-nexttile
-boxplot(RRHipEfforts, testNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AR Hip')
-nexttile
-boxplot(RRKneEfforts, testNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AR Knee')
-nexttile
-boxplot(RRAbdEfforts, testNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AR Abductor')
 
-sgtitle('Spot Concatenated Absolute Joint Torques by Experiment Type and Motion')
-saveName = "../pictures/spotAbsJointTorques";
-saveas(fig1, saveName, 'jpg')
-% close
-
-% ===================================================================
-
-fig2 = figure(WindowState="maximized");     %('Visible','off');
-tiledlayout(4,3, 'TileSpacing','tight','Padding','tight')
-% FL Leg
-nexttile
-boxplot(FLHipGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FL Hip')
-nexttile
-boxplot(FLKneGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FL Knee')
-nexttile
-boxplot(FLAbdGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FL Abductor')
-% FR Leg
-nexttile
-boxplot(FRHipGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FR Hip')
-nexttile
-boxplot(FRKneGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FR Knee')
-nexttile
-boxplot(FRAbdGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FR Abductor')
-% AL Leg
-nexttile
-boxplot(RLHipGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AL Hip')
-nexttile
-boxplot(RLKneGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AL Knee')
-nexttile
-boxplot(RLAbdGaitAve, abvNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AL Abductor')
-% AR Leg
-nexttile
-boxplot(RRHipGaitAve, testNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AR Hip')
-nexttile
-boxplot(RRKneGaitAve, testNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AR Knee')
-nexttile
-boxplot(RRAbdGaitAve, testNames, "Whisker",15)
-ylim([minGaitAveEff,maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AR Abductor')
-
-sgtitle('Spot Concatenated Gaited Average of Absolute Joint Torques by Experiment Type and Motion')
-saveName = "../pictures/spotGaitedAveTorques";
-saveas(fig2, saveName, 'jpg')
-% close
-
-% ====================================================================
-
-fig3 = figure(WindowState="maximized");     %('Visible','off');
-tiledlayout(4,3, 'TileSpacing','Compact','Padding','Compact')
-% FL Leg
-nexttile
-boxplot(FLHipAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FL Hip')
-% yline(hipLim, '--', 'Limit')
-nexttile
-boxplot(FLKneAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FL Knee')
-% yline(kneLim, '--', 'Limit')
-nexttile
-boxplot(FLAbdAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FL Abductor')
-% yline(abdLim, '--', 'Limit')
-% FR Leg
-nexttile
-boxplot(FRHipAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FR Hip')
-nexttile
-boxplot(FRKneAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FR Knee')
-nexttile
-boxplot(FRAbdAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FR Abductor')
-% AL Leg
-nexttile
-boxplot(RLHipAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AL Hip')
-nexttile
-boxplot(RLKneAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AL Knee')
-nexttile
-boxplot(RLAbdAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AL Abductor')
-% AR Leg
-nexttile
-boxplot(RRHipAngles, testNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AR Hip')
-nexttile
-boxplot(RRKneAngles, testNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AR Knee')
-nexttile
-boxplot(RRAbdAngles, testNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AR Abductor')
-
-sgtitle('Spot Concatenated Joint Angles by Experiment Type and Motion')
-saveName = "../pictures/spotJointAngles";
-saveas(fig3, saveName, 'jpg')
-
-%}
 
 
 

@@ -6,11 +6,6 @@ x = xyz(:,1);
 y = xyz(:,2);
 z = xyz(:,3);
 
-% for i = 1:size(xyz,1)
-%     if x(i) == 0
-%         x(i) = nan;
-%     end
-% end
 
 time = 0:(1/30):size(xyz, 1)/30 - (1/30);
 

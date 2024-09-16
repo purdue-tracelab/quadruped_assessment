@@ -1,6 +1,3 @@
-Connect to spot wifi: spot-BD--12140002
-P: fdk26ie3srxy
-
 Wifi IP: 192.168.80.3
 Core IP: 192.168.50.3
 

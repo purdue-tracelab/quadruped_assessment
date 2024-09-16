@@ -25,21 +25,18 @@ function plotJointEfforts(JS, Odo, path)
     subplot(2,2,1);
     plot(JS.time, JS.FL_hipX, JS.time, JS.FL_hipY, JS.time, JS.FL_knee);
     title('Front Left Leg');
-%     legend('HipX', 'HipY', 'Knee')
     xlim([0, maxTime])
     ylim([minJS, maxJS])
     
     subplot(2,2,2);
     plot(JS.time, JS.FR_hipX, JS.time, JS.FR_hipY, JS.time, JS.FR_knee);
     title('Front Right Leg');
-%     legend('HipX', 'HipY', 'Knee')
     xlim([0, maxTime])
     ylim([minJS, maxJS])
     
     subplot(2,2,3);
     plot(JS.time, JS.RL_hipX, JS.time, JS.RL_hipY, JS.time, JS.RL_knee);
     title('Rear Left Leg');
-%     legend('HipX', 'HipY', 'Knee')
     xlim([0, maxTime])
     ylim([minJS, maxJS])
     ylabel('Joint Efforts')
@@ -48,7 +45,6 @@ function plotJointEfforts(JS, Odo, path)
     subplot(2,2,4);
     plot(JS.time, JS.RR_hipX, JS.time, JS.RR_hipY, JS.time, JS.RR_knee);
     title('Rear Right Leg');
-%     legend('HipX', 'HipY', 'Knee')
     xlim([0, maxTime])
     ylim([minJS, maxJS])
 

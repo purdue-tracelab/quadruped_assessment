@@ -145,10 +145,6 @@ function jointEffort = parse_Joint_Efforts(expTable, setName, moName, expName)
     jointEffort.FR.gaitedAve.abd = getGaitingAverages(jointEffort.FR.Effort.abd);
     jointEffort.RR.gaitedAve.abd = getGaitingAverages(jointEffort.RR.Effort.abd);
 
-%     jointEffort.FL.gaitedTime = jointEffort.FL.time(1+18:end-18);
-%     jointEffort.RL.gaitedTime = jointEffort.RL.time(1+18:end-18);
-%     jointEffort.FR.gaitedTime = jointEffort.FR.time(1+18:end-18);
-%     jointEffort.RR.gaitedTime = jointEffort.RR.time(1+18:end-18);
 
     %% Gaiting RMS
     jointEffort.FL.gaitedRMS.hip = getGaitingRMS(jointEffort.FL.Effort.hip);
@@ -172,12 +168,6 @@ function jointEffort = parse_Joint_Efforts(expTable, setName, moName, expName)
     jointEffort.FR.gaitedTime = jointEffort.FR.time(1+18:end-18);
     jointEffort.RR.gaitedTime = jointEffort.RR.time(1+18:end-18);
     
-    %% Plotting
-%     plotJoint_Efforts_Contact(jointEffort)
-%     plotGaitingAverages(jointEffort)
-%     plotGaitingRMS(jointEffort)
-
-    % getGaitingAverages(jointEffort.FL.Effort.abd)
 
 end
 

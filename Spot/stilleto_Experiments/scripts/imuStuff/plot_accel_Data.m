@@ -5,140 +5,18 @@ cd(fileparts(matlab.desktop.editor.getActiveFilename));
 filePath1 = '../../stiletto_imuData//IMU1//datalog00002.TXT';
 filePath2 = '../../stiletto_imuData//IMU2Or3//datalog00024.TXT';
 filePath3 = '../../stiletto_imuData//IMU3Or2//datalog00013.TXT';
-%filePath4 = 'stiletto_imuData//IMU4//datalog00004.TXT';
 
 IMU1_S = readtable(strcat(filePath1));
 IMU2_S = readtable(strcat(filePath2));
 IMU3_S = readtable(strcat(filePath3));
-%IMU4_S = readtable(strcat(filePath4));
 
 %% Format accelerometer data
 % milli-g's  -->  g's
 IMU1_S = formatUnits(IMU1_S);
 IMU2_S = formatUnits(IMU2_S);
 IMU3_S = formatUnits(IMU3_S);
-%IMU4_S = formatUnits(IMU4_S);
 
 
-
-%% aX
-%{
-% Underway (10 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aX, IMU2_S.gps_Time,IMU2_S.aX,...
-     IMU3_S.gps_Time,IMU3_S.aX)%, IMU4_S.gps_Time,IMU4_S.aX)
-uw1 = "16:13:00.000";
-uw2 = "16:20:00.000";
-uw1 = duration(uw1);
-uw2 = duration(uw2);
-xlim([uw1,uw2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-title('IMU Acceleration X Data During Underway Wave State')
-
-% Seastate (20 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aX, IMU2_S.gps_Time,IMU2_S.aX,...
-     IMU3_S.gps_Time,IMU3_S.aX)%, IMU4_S.gps_Time,IMU4_S.aX)
-ss1 = "17:05:00.000";
-ss2 = "17:10:00.000";
-ss1 = duration(ss1);
-ss2 = duration(ss2);
-xlim([ss1,ss2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-title('IMU Acceleration X Data During Sea State Wave State')
-
-% S-Curves (20 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aX, IMU2_S.gps_Time,IMU2_S.aX,...
-     IMU3_S.gps_Time,IMU3_S.aX)%, IMU4_S.gps_Time,IMU4_S.aX)
-sc1 = "17:37:30.000";
-sc2 = "17:41:00.000";
-sc1 = duration(sc1);
-sc2 = duration(sc2);
-xlim([sc1,sc2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-title('IMU Acceleration X Data During S-Curves Wave State')
-
-
-%% aY
-% Underway (10 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aY, IMU2_S.gps_Time,IMU2_S.aY,...
-     IMU3_S.gps_Time,IMU3_S.aY)%, IMU4_S.gps_Time,IMU4_S.aY)
-% uw1 = "16:13:00.000";
-% uw2 = "16:20:00.000";
-% uw1 = duration(uw1);
-% uw2 = duration(uw2);
-xlim([uw1,uw2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-
-% Seastate (20 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aY, IMU2_S.gps_Time,IMU2_S.aY,...
-     IMU3_S.gps_Time,IMU3_S.aY)%, IMU4_S.gps_Time,IMU4_S.aY)
-% ss1 = "17:05:00.000";
-% ss2 = "17:10:00.000";
-% ss1 = duration(ss1);
-% ss2 = duration(ss2);
-xlim([ss1,ss2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-
-% S-Curves (20 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aY, IMU2_S.gps_Time,IMU2_S.aY,...
-     IMU3_S.gps_Time,IMU3_S.aY)%, IMU4_S.gps_Time,IMU4_S.aY)
-% sc1 = "17:37:30.000";
-% sc2 = "17:41:00.000";
-% sc1 = duration(sc1);
-% sc2 = duration(sc2);
-xlim([sc1,sc2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-
-
-
-%% aZ
-% Underway (10 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aZ, IMU2_S.gps_Time,IMU2_S.aZ,...
-     IMU3_S.gps_Time,IMU3_S.aZ)%, IMU4_S.gps_Time,IMU4_S.aZ)
-% uw1 = "16:13:00.000";
-% uw2 = "16:20:00.000";
-% uw1 = duration(uw1);
-% uw2 = duration(uw2);
-xlim([uw1,uw2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-
-% Seastate (20 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aZ, IMU2_S.gps_Time,IMU2_S.aZ,...
-     IMU3_S.gps_Time,IMU3_S.aZ)%, IMU4_S.gps_Time,IMU4_S.aZ)
-% ss1 = "17:05:00.000";
-% ss2 = "17:10:00.000";
-% ss1 = duration(ss1);
-% ss2 = duration(ss2);
-xlim([ss1,ss2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-
-% S-Curves (20 kn)
-figure
-plot(IMU1_S.gps_Time,IMU1_S.aZ, IMU2_S.gps_Time,IMU2_S.aZ,...
-     IMU3_S.gps_Time,IMU3_S.aZ)%, IMU4_S.gps_Time,IMU4_S.aZ)
-% sc1 = "17:37:30.000";
-% sc2 = "17:41:00.000";
-sc1 = duration(sc1);
-sc2 = duration(sc2);
-xlim([sc1,sc2]);
-%ylim([-160000,100000,])
-legend('Front','APort','AStar')%,'Spot')
-%}
 
 %% Extract data
 uw.i = uw1;     uw.f = uw2;
@@ -148,7 +26,7 @@ sc.i = sc1;     sc.f = sc2;
 [IMU1] = get_aXYZ(IMU1_S, uw, ss, sc);
 [IMU2] = get_aXYZ(IMU2_S, uw, ss, sc);
 [IMU3] = get_aXYZ(IMU3_S, uw, ss, sc);
-% [IMU4] = get_aXYZ(IMU4_S, uw, ss, sc);
+
 
 IMU1.uw.title = 'Underway (10 kn)';
 IMU2.uw.title = 'Underway (10 kn)';
@@ -202,10 +80,6 @@ IMU3.uw = accel2disp(IMU3.uw);
 IMU3.ss = accel2disp(IMU3.ss);
 IMU3.sc = accel2disp(IMU3.sc);
 
-%% Plot Disp
-% plotDisp(IMU1.uw, IMU2.uw, IMU3.uw)
-% plotDisp(IMU1.ss, IMU2.ss, IMU3.ss)
-% plotDisp(IMU1.sc, IMU2.sc, IMU3.sc)
 
 %% FFT Vel
 IMU1.uw = imuV_FFT(IMU1.uw);
@@ -342,27 +216,6 @@ end
 function [imuTimestamp] = accel2disp(imuTimestamp)
 
     ts = imuTimestamp;
-%{
-    % Accel -> Veloc
-    % da * dt = v  (dt = Fs = 10hz = 0.1s)
-    for i = 1:size(ts.aX,1)-1
-        ts.vX(i) = (ts.aX(i+1) - ts.aX(i)) * 0.1;
-        ts.vY(i) = (ts.aY(i+1) - ts.aY(i)) * 0.1;
-        ts.vZ(i) = (ts.aZ(i+1) - ts.aZ(i)) * 0.1;
-
-        ts.vTime(i) = ts.aTime(i);
-    end
-
-    % Veloc -> Disp
-    % dv * dt = d  (dt = Fs = 10hz = 0.1s)
-    for i = 1:size(ts.vX,2)-1
-        ts.dX(i) = (ts.vX(i+1) - ts.vX(i)) * 0.1;
-        ts.dY(i) = (ts.vY(i+1) - ts.vY(i)) * 0.1;
-        ts.dZ(i) = (ts.vZ(i+1) - ts.vZ(i)) * 0.1;
-
-        ts.dTime(i) = ts.vTime(i);
-    end
-%}
 
     ts.vX = cumtrapz(ts.aX);
     ts.vY = cumtrapz(ts.aY);
@@ -416,17 +269,10 @@ P1 = P2(1:n/2+1);
     P1(2:end-1) = 2*P1(2:end-1);
     
     ave = mean(P1);
-%    RMS = rms(P1);
 
-%    f = Fs*(0:(L/2))/L;
 f = Fs*(0:(n/2))/n;
 
-%     figure
-%     plot(f,P1, f,P1, '.')
-%     yline(ave)
-%     title(dtitle)
-%     xlabel("f (Hz)")
-%     ylabel("|P1(f)|")
+
 end
 
 
@@ -566,11 +412,9 @@ function d = plotWave(d, ts, imuNum, dir)
     mag = string(maxMag);
 
     if dir == 'Z'
-%         d.angle = d.angle*20/(maxA-minB) - (maxMag*20/(maxA-minB) - 10);
         d.angle = d.angle * 10/maxMag;
         d.equation = strcat('(10/',mag,')*(',d.equation,')');
     elseif dir == 'E'
-%         d.angle = d.angle*0.1/(maxA-minB) - (maxMag*0.1/(maxA-minB) - 0.05);
         d.angle = d.angle * -0.05/maxMag;
         d.equation = strcat('(-0.05/',mag,')*(',d.equation,')');
     end
