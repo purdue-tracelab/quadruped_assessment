@@ -1,0 +1,62 @@
+Wifi IP: 192.168.80.3
+Core IP: 192.168.50.3
+
+## Enter virtual environment:
+source my_spot_env/bin/activate
+
+python control:
+U: nerve_dev
+P: NERVEspot1308
+
+export BOSDYN_CLIENT_USERNAME=nerve_dev
+export BOSDYN_CLIENT_PASSWORD=NERVEspot1308
+
+## Independent E-Stop (Needed for most examples in seperate windows)
+cd ~/spot-sdk/python/examples/estop
+python3 estop_gui.py 192.168.80.3
+## bash command: spot_estop
+
+## To use examples:
+cd ~/spot-sdk/python/examples/<example name>
+## Initial use: 
+python3 -m pip install -r requirements.txt
+
+## Docking
+cd ~/spot-sdk/python/examples/docking/
+python3 dock_my_robot.py (--dock-id 520 | --undock) 192.168.80.3
+## bash command: spot_undock
+## bash command: spot_dock
+
+## WASD (EXTERNAL ESTOP NOT REQUIRED)
+cd ~/spot-sdk/python/examples/wasd
+python3 wasd.py 192.168.80.3
+## bash command: spot_wasd
+
+## Fiducial Follow Example:
+cd ~/spot-sdk/python/examples/fiducial_follow
+python3 -m fiducial_follow --avoid-obstacles True --use-world-objects True 192.168.80.3
+
+## Custom user code:
+cd ~/spot-sdk/python/examples/custom_code
+python3 arm_with_body_follow.py 192.168.80.3
+
+## TO START USING SPOT EXAMPLES
+source ~/my_spot_env/bin/activate
+export BOSDYN_CLIENT_USERNAME=nerve_dev
+export BOSDYN_CLIENT_PASSWORD=NERVEspot1308
+cd ~/spot-sdk/python/examples/
+
+
+## ROS2 Driver
+export BOSDYN_CLIENT_USERNAME=nerve_dev
+export BOSDYN_CLIENT_PASSWORD=NERVEspot1308
+export SPOT_IP=192.168.80.3
+ros2 launch spot_driver spot_driver.launch.py config_file:=~/ros2_ws/src/spot_ros2/spot_driver/config/spot_ros_example.yaml has_arm:=True launch_rviz:=False 
+
+
+
+
+
+
+
+
