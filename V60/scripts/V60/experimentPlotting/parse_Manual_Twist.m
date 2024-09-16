@@ -34,29 +34,7 @@ function twist = parse_Manual_Twist(expTable, setName, moName, expName)
     timeX = 0;
     timeY = 0;
     timeZ = 0;
-%     for i = 2:size(time, 1)-1
-%         if linX(i) > linX(i-1)
-%             if linX(i) > linX(i+1)
-%                 x = x+1;
-%                 linX_P(x) = linX(i);
-%                 timeX(x) = time(i);
-%             end
-%         end
-%         if linY(i) > linY(i-1)
-%             if linY(i) > linY(i+1)
-%                 y = y+1;
-%                 linY_P(y) = linY(i);
-%                 timeY(y) = time(i);
-%             end
-%         end
-%         if angZ(i) > angZ(i-1)
-%             if angZ(i) > angZ(i+1)
-%                 z = z+1;
-%                 angZ_P(z) = angZ(i);
-%                 timeZ(z) = time(i);
-%             end
-%         end
-%     end
+
     for i = 2:size(time, 1)-1
         if (abs(linX(i-1)) < abs(linX(i))) && (abs(linX(i)) > abs(linX(i+1)))
             x = x+1;
@@ -97,9 +75,7 @@ function twist = parse_Manual_Twist(expTable, setName, moName, expName)
     twist.peaks = peaks;
 
     
-    %% Plotting
-%     plotManual_Twist(titleName, expName, angZ, linX, linY, time)
-%     plotManual_Twist_peaks(titleName, expName, timeX, linX_P, timeY, linY_P, timeZ, angZ_P)
+
 
 end
 

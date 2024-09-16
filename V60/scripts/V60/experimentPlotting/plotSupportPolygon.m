@@ -82,41 +82,7 @@ function polygon = plotSupportPolygon(robot, CoM, robotName, savePath, testName)
    
     %% Plot
     screensize = get(0, 'ScreenSize');
-%{
-    fig = figure('Visible','off', WindowState="maximized", ...
-          Position=[screensize(4)/3, 1, 3*screensize(4)/4, screensize(3)]);
-%     fig = figure(WindowState="maximized",...
-%         Position=[screensize(4)/3, 1, 3*screensize(4)/4, screensize(3)]);    
-    for f = 1:size(CoM.X, 1)
-        plot([polygon.FL.X(f), polygon.FR.X(f), polygon.AR.X(f), polygon.AL.X(f), polygon.FL.X(f)],...
-             [polygon.FL.Z(f), polygon.FR.Z(f), polygon.AR.Z(f), polygon.AL.Z(f), polygon.FL.Z(f)],...
-             '-', 'Color', [0.0, 0.0, 0.0, 0.01], 'LineWidth', 1)
-        hold on
-%         plot(polygon.CoM.X, polygon.CoM.Z, 'r')
-%         hold on
-    end
-    plot(polygon.CoM.X, polygon.CoM.Z, 'r',...
-         polygon.CoM.X(1), polygon.CoM.Z(1), 'b.',...
-         polygon.CoM.X(end), polygon.CoM.Z(end), 'bx')
-%     plot(polygon.FL.X(1), polygon.FL.Z(1), 'cx')
 
-    xlabel('Location (L->R) [mm]')
-    ylabel('Location (A->F) [mm]')
-    %legend('Support Polygon','CoM','Start','End', Location='west')
-    testName = strrep(testName,"_","-");
-    title(strcat(robotName," Approx CoM within Support Polygon: ", testName))
-    subtitle(strcat("Abs Min Dist of CoM to Polygon: ", num2str(absMinDist, '%.2f'),...
-             "   |   Ave Min Dist of CoM to Polygon: ", num2str(aveMinDist, '%.2f')))
-    axis equal
-    axis tight
-    
-    % "../pictures/SupportPolygon/"
-    saveName = strcat(savePath,testName,"_supportPolygon");
-    saveas(fig, saveName, 'jpg')
-    
-    close all
-%}
-%    fprintf('Reminder: Support Polygon plotting lines are commented out to save time \n')
 
     %% Calculate Support Polygon wrt Robot
     FX = (polygon.FL.X + polygon.FR.X)/2;
@@ -182,32 +148,7 @@ function polygon = plotSupportPolygon(robot, CoM, robotName, savePath, testName)
     polygon.rangeX_Robot = maxXPos_robot - minXPos_robot;
     polygon.rangeZ_Robot = maxZPos_robot - minZPos_robot;
 
-    %{
-    maxZPos_RobotF = min(d_FLFR); % distance closest to front supp poly line
-    minZPos_RobotF = max(d_FLFR); % distance Furthest from front supp poly line
-    maxZPos_RobotA = max(d_ALAR); % distance Furthest from Aft supp poly line
-    minZPos_RobotA = min(d_ALAR); % distance closest to Aft supp poly line
 
-    maxXPos_RobotR = min(d_FRAR); % distance closest to right supp poly line
-    minXPos_RobotR = max(d_FRAR); % distance Furthest from right supp poly line
-    maxXPos_RobotL = max(d_FLAL); % distance Furthest from left supp poly line
-    minXPos_RobotL = min(d_FLAL); % distance closest to left supp poly line
-
-    varianceZ_RobotF = minZPos_RobotF - maxZPos_RobotF;
-    varianceZ_RobotA = maxZPos_RobotA - minZPos_RobotA;
-
-    varianceX_RobotR = minXPos_RobotR - maxXPos_RobotR;
-    varianceX_RobotL = maxXPos_RobotL - minXPos_RobotL;
-
-    polygon.varianceZ_RobotAve = (varianceZ_RobotF + varianceZ_RobotA)/2;
-    polygon.varianceX_RobotAve = (varianceX_RobotR + varianceX_RobotL)/2;
-    %}
-    
-
-    %% Plot Polygons
-    %{%
-%     fig = figure('Visible','off', WindowState="maximized", ...
-%           Position=[screensize(4)/3, 1, 3*screensize(4)/4, screensize(3)]);
     fig = figure
     tiledlayout(1,2,'TileSpacing','Compact','Padding','Compact')
 
@@ -249,17 +190,14 @@ function polygon = plotSupportPolygon(robot, CoM, robotName, savePath, testName)
     sgtitleName = strcat('{\bf\fontsize{10}',robotName," Approx CoM within Support Polygon wrt Robot: ", testName,"}");
     subName = strcat('{\fontsize{10}',"Abs Min Dist of CoM to Polygon: ", num2str(absMinDist, '%.2f'),...
               "   |   Ave Min Dist of CoM to Polygon: ", num2str(aveMinDist, '%.2f'),"}");
-%     sgtitle({['{\bf\fontsize{14}' sgtitleName '}'],subName});
+
     sgtitle({sgtitleName,subName})
-%     sgtitle(strcat(robotName," Approx CoM within Support Polygon wrt Robot: ", testName))
-%     subtitle(strcat("Abs Min Dist of CoM to Polygon: ", num2str(absMinDist, '%.2f'),...
-%              "   |   Ave Min Dist of CoM to Polygon: ", num2str(aveMinDist, '%.2f')))
+
     saveName = strcat(savePath,testName,"_supportPolygons");
-%    saveas(fig, saveName, 'jpg')
+
     
     close all
-    %}
-    %fprintf("Support Polygon Code Commented out to Reduce Time")
+
 
 end
 

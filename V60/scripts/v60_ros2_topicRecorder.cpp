@@ -65,8 +65,6 @@ std::ofstream toeContactZ;
 std::ofstream twistX;
 std::ofstream twistY;
 std::ofstream twistZ;
-//std::ofstream gyroXYZ;
-//std::ofstream gyroTime;
 
 void save_data()
 {// =====  Creates new file name to replace temp data  =====
@@ -107,8 +105,7 @@ void save_data()
 	rename("manualTwistX.txt",     newMTX_fileName.c_str());
 	rename("manualTwistY.txt",     newMTY_fileName.c_str());
 	rename("manualTwistZ.txt",     newMTZ_fileName.c_str());
-	//rename("gyroXYZ.txt",          newGyro_fileName.c_str());
-	//rename("gyroTime.txt",         newGyro_fileName.c_str());
+
 	
 	// Remove Temp files
 	remove("jointStateTime.txt");
@@ -123,8 +120,6 @@ void save_data()
 	rename("manualTwistX.txt");
 	rename("manualTwistY.txt");
 	rename("manualTwistZ.txt");
-	//remove("gyroXYZ.txt");
-	//remove("gyroTime.txt");
 }
 
 
@@ -147,8 +142,6 @@ void end_recorder()
 	manualTwistX.close();
 	manualTwistY.close();
 	manualTwistZ.close();
-	//gyroXYZ.close();
-	//gyroTime.close();
 	
 	if (input == 'Y' || input == 'y')
 	{
@@ -170,8 +163,6 @@ void end_recorder()
 		rename("manualTwistX.txt");
 		rename("manualTwistY.txt");
 		rename("manualTwistZ.txt");
-		//remove("gyroXYZ.txt");
-		//remove("gyroTime.txt");
 		data_recorder();
 	}
 	else
@@ -205,8 +196,7 @@ void data_recorder()
 		manualTwistX.open ("manualTwistX.txt", std::ofstream::out | std::ofstream::trunc);
 		manualTwistY.open ("manualTwistY.txt", std::ofstream::out | std::ofstream::trunc);
 		manualTwistZ.open ("manualTwistZ.txt", std::ofstream::out | std::ofstream::trunc);
-		//gyroXYZ.open ("gyroXYZ.txt", std::ofstream::out | std::ofstream::trunc);
-		//gyroTime.open ("gyroTime.txt", std::ofstream::out | std::ofstream::trunc);
+
 		
 		std::cout << "\nRecording started \n";
 		std::cout << "\n [Ctrl+C] to stop recording\n";

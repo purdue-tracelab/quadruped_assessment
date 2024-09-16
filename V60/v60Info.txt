@@ -1,11 +1,3 @@
-
-
-$ ssh ghost@192.168.168.105
-pass: ghost
-
-Wifi: Vision60_v5.1C_015
-Pass: vision60
-
 ros Source:
 $ ros2s
 Follow with normal ros2 commands

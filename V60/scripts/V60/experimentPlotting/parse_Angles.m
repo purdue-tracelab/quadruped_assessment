@@ -3,7 +3,6 @@ function angles = parse_Angles(expTable, setName, moName, expName)
 % Only non-zero data should be angular z aand linear x and y
 
     %% Parsing
-%     try
     j = 0;
     for i = 1:size(expTable.x__time, 1)
         if ~isnan(expTable.x_mcu_state_jointURDF_0_position(i))
@@ -27,9 +26,7 @@ function angles = parse_Angles(expTable, setName, moName, expName)
             angles.abd_A_RR(j, 1) = expTable.x_mcu_state_jointURDF_11_position(i);
         end
     end
-%     catch
-%         warning(strcat(setName, " ",moName, " ", expName, ": Angle error encountered."));
-%     end
+
 end
 
 

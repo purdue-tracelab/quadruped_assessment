@@ -28,19 +28,17 @@ kneLim = 98.8;
 abdLim = 98.8;
 
 %% Parse Data
-% init stuff
+% init 
 maxLength = 0;
 r = 0;
 
 % Sort experiment set (BothDRS, JustArm, JustBody, ...)
 for set = 3:numSet
-    %for set = 3
     motionDir = dir(strcat(setDir(set).folder, '\', setDir(set).name));
     numMo = size(motionDir,1);      % = num of mo + 2 ('.', '..')
 
     % Sorts Motion type (none, low, heavy, stilletto)
     for mo = 3:numMo
-        %for mo = 5
         expDirPath = strcat(motionDir(mo).folder, '\', motionDir(mo).name, '\');
         expDir = dir(strcat(expDirPath, '*.csv'));      
         numExp = size(expDir,1);
@@ -91,7 +89,6 @@ for set = 3:numSet
 
         % Sorts indiv experiment number (1-10 or 1-5)
         for exp = 1:numExp
-            %for exp = 9
             expDataPath = strcat(expDir(mo).folder, '\exp', string(exp), '.csv');
 
             expTable = readtable(expDataPath);      % Retreive Data from csv
@@ -105,11 +102,6 @@ for set = 3:numSet
             expData(set).motion(mo).name = moName;
             expData(set).motion(mo).trial(exp).name = expName;
             
-%             gaitFrame = getGaitFrames(expTable);
-%             if gaitFrame > 5
-%                 r = r + 1;
-%                 aveGaitFrame(r,1) = gaitFrame;
-%             end
             
             expData(set).motion(mo).trial(exp).manTwist = ...
                     parse_Manual_Twist(expTable, setName, moName, expName);
@@ -208,26 +200,19 @@ for set = 3:numSet
         end
     end
 end
-% frameNum = round(mean(aveGaitFrame));     % ave frame = 37
 
 
 %% Plot Manual Twist Input Density per Each Motion
 screensize = get(0, 'ScreenSize');
 for set = 3:length(expData)
-% for set = 4
-% for mo = 3
     for mo = 3:length(expData(set).motion)
 
-        %setMo = figure(Position=[1, 1*screensize(4)/6, screensize(3), 5*screensize(4)/6]);     %('Visible','off');
         setMo = figure(WindowState="maximized");     %('Visible','off');
         tiledlayout(3,1, 'TileSpacing','Compact','Padding','Compact')
         
         % Plot all linX
         nexttile
         for exp = 1:length(expData(set).motion(mo).trial)
-%             plot(expData(set).motion(mo).trial(exp).manTwist.time, ...
-%                  expData(set).motion(mo).trial(exp).manTwist.linX, ...
-%                  'Color', [0.0, 0.0, 0.0, 0.1])
             area(expData(set).motion(mo).trial(exp).manTwist.time, ...
                  expData(set).motion(mo).trial(exp).manTwist.linX, ...
                  0, 'EdgeColor','none','FaceColor','k','FaceAlpha',0.2)
@@ -241,9 +226,6 @@ for set = 3:length(expData)
         % Plot all linY
         nexttile
         for exp = 1:length(expData(set).motion(mo).trial)
-%             plot(expData(set).motion(mo).trial(exp).manTwist.time, ...
-%                  expData(set).motion(mo).trial(exp).manTwist.linY, ...
-%                  'Color', [0.0, 0.0, 0.0, 0.1])
             area(expData(set).motion(mo).trial(exp).manTwist.time, ...
                  expData(set).motion(mo).trial(exp).manTwist.linY, ...
                  0, 'EdgeColor','none','FaceColor','k','FaceAlpha',0.2)
@@ -257,9 +239,6 @@ for set = 3:length(expData)
         % Plot all angZ
         nexttile
         for exp = 1:length(expData(set).motion(mo).trial)
-%             plot(expData(set).motion(mo).trial(exp).manTwist.time, ...
-%                  expData(set).motion(mo).trial(exp).manTwist.angZ, ...
-%                  'Color', [0.0, 0.0, 0.0, 0.3])
             area(expData(set).motion(mo).trial(exp).manTwist.time, ...
                  expData(set).motion(mo).trial(exp).manTwist.angZ, ...
                  0, 'EdgeColor','none','FaceColor','k','FaceAlpha',0.2)
@@ -415,281 +394,10 @@ maxGaitAveEff = max([max(max(FLHipGaitAve_Eff)), max(max(FLKneGaitAve_Eff)), max
                      max(max(RLHipGaitAve_Eff)), max(max(RLKneGaitAve_Eff)), max(max(RLAbdGaitAve_Eff)),...
                      max(max(FRHipGaitAve_Eff)), max(max(FRKneGaitAve_Eff)), max(max(FRAbdGaitAve_Eff)),...
                      max(max(RRHipGaitAve_Eff)), max(max(RRKneGaitAve_Eff)), max(max(RRAbdGaitAve_Eff))]);
-% maxAllTwists  = ceil(maxAllTwists/10)*10;
+
 minAllTwists  = -maxAllTwists %* 0.03;
-% maxAllAngles  = ceil(maxAllAngles/10)*10;
-% minAllAngles  = -maxAllAngles %* 0.03;
 maxAllEffort  = ceil(maxAllEffort/10)*10;
 minAllEffort  = -maxAllEffort * 0.03;
 maxGaitAveEff = ceil(maxGaitAveEff/10)*10;
 minGaitAveEff = -maxGaitAveEff * 0.03;
-
-
-%% Gather Table Data
-% Maximums
-
-% Experiment = ["Baseline";"Both"; " "; " ";"Just Arm";" ";" ";"Jusy Body"; " ";" "];
-% MotionType = ["Na"; "1"; "2"; "3"; "1"; "2"; "3"; "1"; "2"; "3"];
-% Hip_FL     = [max(FLHip)]
-% jointMaxes = []
-% jointTable = max(FLHipEfforts);
-
-
-%% Box Plotting
-%{
-fig1 = figure(WindowState="maximized");     %('Visible','off');
-tiledlayout(4,3, 'TileSpacing','Compact','Padding','Compact')
-% FL Leg
-nexttile
-% yline(hipLim, '--', 'Limit')
-% hold on
-boxplot(FLHipEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FL Hip')
-nexttile
-boxplot(FLKneEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FL Knee')
-% yline(kneLim, '--', 'Limit')
-nexttile
-boxplot(FLAbdEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FL Abductor')
-% yline(abdLim, '--', 'Limit')
-% FR Leg
-nexttile
-boxplot(FRHipEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FR Hip')
-nexttile
-boxplot(FRKneEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FR Knee')
-nexttile
-boxplot(FRAbdEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('FR Abductor')
-% AL Leg
-nexttile
-boxplot(RLHipEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AL Hip')
-nexttile
-boxplot(RLKneEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AL Knee')
-nexttile
-boxplot(RLAbdEfforts, abvNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AL Abductor')
-% AR Leg
-nexttile
-boxplot(RRHipEfforts, testNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AR Hip')
-nexttile
-boxplot(RRKneEfforts, testNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AR Knee')
-nexttile
-boxplot(RRAbdEfforts, testNames, "Whisker",15)
-ylim([minAllEffort, maxAllEffort])
-ylabel('Torque [Nm]')
-title('AR Abductor')
-
-sgtitle('Vision 60 Concatenated Joint Torques by Experiment Type and Motion')
-saveName = "../../../pictures/2023_tests/v60AbsJointTorques";
-saveas(fig1, saveName, 'jpg')
-
-
-fig2 = figure(WindowState="maximized");     %('Visible','off');
-tiledlayout(4,3, 'TileSpacing','Compact','Padding','Compact')
-% FL Leg
-nexttile
-boxplot(FLHipGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FL Hip')
-nexttile
-boxplot(FLKneGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FL Knee')
-nexttile
-boxplot(FLAbdGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FL Abductor')
-% FR Leg
-nexttile
-boxplot(FRHipGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FR Hip')
-nexttile
-boxplot(FRKneGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FR Knee')
-nexttile
-boxplot(FRAbdGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('FR Abductor')
-% AL Leg
-nexttile
-boxplot(RLHipGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AL Hip')
-nexttile
-boxplot(RLKneGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AL Knee')
-nexttile
-boxplot(RLAbdGaitAve_Eff, abvNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AL Abductor')
-% AR Leg
-nexttile
-boxplot(RRHipGaitAve_Eff, testNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AR Hip')
-nexttile
-boxplot(RRKneGaitAve_Eff, testNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AR Knee')
-nexttile
-boxplot(RRAbdGaitAve_Eff, testNames, "Whisker",15)
-ylim([minGaitAveEff, maxGaitAveEff])
-ylabel('Torque [Nm]')
-title('AR Abductor')
-
-sgtitle('Vision 60 Concatenated Gaited Average of Joint Torques by Experiment Type and Motion')
-saveName = "../../../pictures/2023_tests/v60GaitedAveTorques";
-saveas(fig2, saveName, 'jpg')
-%}
-%{
-fig3 = figure(WindowState="maximized");     %('Visible','off');
-tiledlayout(4,3, 'TileSpacing','Compact','Padding','Compact')
-% FL Leg
-nexttile
-boxplot(FLHipAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FL Hip')
-% yline(hipLim, '--', 'Limit')
-nexttile
-boxplot(FLKneAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FL Knee')
-% yline(kneLim, '--', 'Limit')
-nexttile
-boxplot(FLAbdAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FL Abductor')
-% yline(abdLim, '--', 'Limit')
-% FR Leg
-nexttile
-boxplot(FRHipAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FR Hip')
-nexttile
-boxplot(FRKneAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FR Knee')
-nexttile
-boxplot(FRAbdAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('FR Abductor')
-% AL Leg
-nexttile
-boxplot(RLHipAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AL Hip')
-nexttile
-boxplot(RLKneAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AL Knee')
-nexttile
-boxplot(RLAbdAngles, abvNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AL Abductor')
-% AR Leg
-nexttile
-boxplot(RRHipAngles, testNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AR Hip')
-nexttile
-boxplot(RRKneAngles, testNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AR Knee')
-nexttile
-boxplot(RRAbdAngles, testNames, "Whisker",15)
-ylim([minAllAngles, maxAllAngles])
-ylabel('Angle [Radians]')
-title('AR Abductor')
-
-sgtitle('Vision 60 Concatenated Joint Angles by Experiment Type and Motion')
-saveName = "../../../pictures/2023_tests/v60JointAngles";
-saveas(fig3, saveName, 'jpg')
-
-%% ===================================================================
-
-fig4 = figure(WindowState="maximized");     %('Visible','off');
-tiledlayout(3,1, 'TileSpacing','Compact','Padding','Compact')
-
-nexttile
-boxplot(manualTwistLinX, testNames, "Whisker",150000000000000000000)
-%ylim([minAllTwists, maxAllTwists])
-ylabel('Input')
-title('Linear X (Forwards-backwards Translation)')
-
-nexttile
-boxplot(manualTwistLinY, testNames, "Whisker",15000000000000000000)
-%ylim([minAllTwists, maxAllTwists])
-ylabel('Input')
-title('Linear Y (Left-Right Translation)')
-
-nexttile
-boxplot(manualTwistAngZ, testNames, "Whisker",150000000000000000000)
-%ylim([minAllTwists, maxAllTwists])
-ylabel('Input')
-title('Angular Z (Let-Right Turning)')
-
-sgtitle('Vision 60 Concatenated Joystick Inputs by Experiment Type and Motion')
-saveName = "../../../pictures/2023_tests/v60ManualTwists";
-saveas(fig4, saveName, 'jpg')
-
-%}
-
-
-
-
-
 

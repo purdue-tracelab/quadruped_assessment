@@ -43,11 +43,8 @@ def save_demo():
         while True:
             js_time = js_data[0] + (js_data[1] * 10.0**-9)
             js_time_arr = np.vstack((js_time_arr, js_data[0:2]))
-            #print(len(js_data[2:8]))
             js_pos_arr = np.vstack((js_pos_arr, js_data[2:2+NUM_JOINTS]))
-            #print(len(js_data[8:14]))
             js_vel_arr = np.vstack((js_vel_arr, js_data[2+NUM_JOINTS:2+NUM_JOINTS+NUM_JOINTS]))
-            #print(len(js_data[14:20]))
             js_eff_arr = np.vstack((js_eff_arr, js_data[2+NUM_JOINTS+NUM_JOINTS:2+NUM_JOINTS+NUM_JOINTS+NUM_JOINTS]))
             
             js_data = getline_data(js_fp)

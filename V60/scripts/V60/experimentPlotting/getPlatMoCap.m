@@ -3,11 +3,8 @@ function plat = getPlatMoCap(trc)
     plat.time = table2array(trc(2:end, 2));
 
     plat.FL.X = table2array(trc(2:end, 3));
-    %plat.FL.X = cla(plat.FL.X);             % This marker doesnt exist so it isnt converting properly
     plat.FL.Y = table2array(trc(2:end, 4));
-    %plat.FL.Y = cla(plat.FL.Y);
     plat.FL.Z = table2array(trc(2:end, 5));
-    %plat.FL.Z = cla(plat.FL.Z);
     plat.FL.name = 'Front Left';
 
     plat.FR.X = table2array(trc(2:end, 6));

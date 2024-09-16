@@ -4,12 +4,7 @@ function V60Disp = plotV60XYZ_Disp(V60Pos, PlatPos, testTitle, testName)
     filePath = "../../../pictures/2023_tests/disp_over_time/";
     
     time = V60Pos.time;
-%     minX = minMax.minX;
-%     maxX = minMax.maxX;
-%     minY = minMax.minY;
-%     maxY = minMax.maxY;
-%     minZ = minMax.minZ;
-%     maxZ = minMax.maxZ;
+
     
     % Average Platform Marker Positions wrt Treadmill Frame
     PlatPos.FR.aveX = mean(PlatPos.FR.X, 'omitnan');
@@ -28,17 +23,7 @@ function V60Disp = plotV60XYZ_Disp(V60Pos, PlatPos, testTitle, testName)
     PlatPos.AR.aveY = mean(PlatPos.AR.Y, 'omitnan');
     PlatPos.AR.aveZ = mean(PlatPos.AR.Z, 'omitnan');
 
-%     figure
-%     plot(time, PlatPos.FR.X, time, PlatPos.FR.Y, time, PlatPos.FR.Z)
-%     figure
-%     plot(time, PlatPos.AR.X, time, PlatPos.AR.Y, time, PlatPos.AR.Z)
-%     figure
-%     plot(time, PlatPos.FL.X, time, PlatPos.FL.Y, time, PlatPos.FL.Z)
-%     figure
-%     plot(time, PlatPos.AL.X, time, PlatPos.AL.Y, time, PlatPos.AL.Z)
-%     figure
-%     plot(time, PlatPos.Po.X, time, PlatPos.Po.Y, time, PlatPos.Po.Z)
-%     legend
+
 
     % V60 XYZ Displacemant from Starting Position
     for i = 1:size(time,1)
@@ -63,8 +48,7 @@ function V60Disp = plotV60XYZ_Disp(V60Pos, PlatPos, testTitle, testName)
     avePo_X = mean(PlatPos.Po.X, 'omitnan');
     avePo_Y = mean(PlatPos.Po.Y, 'omitnan');
 
-%     figure
-%     plot(PlatPos.FR.X, PlatPos.FR.Y, PlatPos.FL.X, PlatPos.FL.Y, PlatPos.AR.X, PlatPos.AR.Y, PlatPos.AL.X, PlatPos.AL.Y)
+
 
     % XY pos over time
     j = figure('Visible','off');
@@ -93,34 +77,7 @@ function V60Disp = plotV60XYZ_Disp(V60Pos, PlatPos, testTitle, testName)
     saveName = strcat(filePath, testName, '_v60Disp');
     saveas(j, saveName, 'jpg')
 
-    % Indiv X,Y,Z disps
-%     figure
-%     subplot (3, 1, 1)
-%     plot(time, V60Pos.C.X)
-%     title('X wrt Treadmill frame')
-%     ylabel('Displacement [mm]')
-%     xlabel('Time [s]')
-%     ylim([minX, maxX])
-% 
-%     subplot (3, 1, 2)
-%     plot(time, V60Pos.C.Y)
-%     title('Y wrt Treadmill frame')
-%     ylabel('Displacement [mm]')
-%     xlabel('Time [s]')
-%     ylim([minY, maxY])
-% 
-%     subplot (3, 1, 3)
-%     plot(time, V60Pos.C.Z)
-%     title('Z wrt Treadmill frame')
-%     ylabel('Displacement [mm]')
-%     xlabel('Time [s]')
-%     ylim([minZ, maxZ])
-%     
-%     titlePlot = strcat("Vision60 Test: ", testTitle);
-%     sgtitle(titlePlot)
 
-%     saveName = strcat(filePath, testName, '_v60DispWRTTreadmill');
-%     saveas(j, saveName, 'jpg')
 
 end
 

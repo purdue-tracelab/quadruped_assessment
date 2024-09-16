@@ -108,24 +108,6 @@ function CoR = calcPlatCOR(plat)
     perpFy = Amax_z*M_CF + b_F;     % Should be under A
 
 
-%     figure
-%     plot(F_z, F_y, 'g.', A_z, A_y, 'c.')
-%     hold on
-%     plot(Rz, Ry, 'k.', CoR.Z, CoR.Y, 'r.')
-%     % Plot platform lines
-%     plot([F_z(maxFyFrameNum),A_z(maxFyFrameNum)], [F_y(maxFyFrameNum),A_y(maxFyFrameNum)], 'b', ...
-%          [F_z(minFyFrameNum),A_z(minFyFrameNum)], [F_y(minFyFrameNum),A_y(minFyFrameNum)], 'b')
-%     % Plot Intersect lines and intersect midpoints
-%     plot([F_z(maxFyFrameNum),F_z(minFyFrameNum)], [F_y(maxFyFrameNum),F_y(minFyFrameNum)], 'm', ...
-%          [A_z(maxFyFrameNum),A_z(minFyFrameNum)], [A_y(maxFyFrameNum),A_y(minFyFrameNum)], 'm', ...
-%          midFz, midFy, 'm.', midAz, midAy, 'm.')
-%     % Plot bisector lines
-%     plot([midFz, Amax_z], [midFy, perpFy], 'y', ...
-%          [midAz, Fmin_z], [midAy, perpAy], 'y')
-%     plot(28.9900, -150.8993, 'c.')
-%     title(strcat("CoR Location for test: ", plat.test))
-%     ylim([-200, 150])
-%     xlim([-700, 600])
 end
 
 
@@ -166,10 +148,7 @@ function int = findPitchInterval(plat)
     period = peakFrameNum(2) - peakFrameNum(1);
     int = round(period * 0.75);
 
-%     figure
-%     plot(plat.time, plat.FR.Y)
-%     xline([plat.time(peakFrameNum(1)), plat.time(peakFrameNum(2))], '--',{'Peak1','Peak2'})
-%     yline(thresholdY, '--', {'Threshold'})
+
 end
 
 
